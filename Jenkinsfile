@@ -1,7 +1,23 @@
-#!groovy
+pipeline {  
+    environment {
+         imagename = "notification-slack"
+     }
 
-@Library('MicroserviceBuilder') _
-microserviceBuilderPipeline {
-  image = 'notification-slack'
-  test = 'false'
+    agent any
+    stages {
+       stage('Build') { 
+          steps {
+              sh 'mvn clean package' 
+          }
+       }  
+       stage('Deliver') {
+            steps {
+                script {
+                    docker.build imagename
+                }
+                sh '/push2dockerhub.sh $imagename'
+            }
+       }
+    }
+
 }
