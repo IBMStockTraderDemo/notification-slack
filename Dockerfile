@@ -13,6 +13,7 @@
 #   limitations under the License.
 
 FROM websphere-liberty:microProfile2
+USER root
 COPY server.xml /config/server.xml
 COPY target/notification-slack-1.0-SNAPSHOT.war /config/apps/NotificationSlack.war
 COPY key.jks /config/resources/security/key.jks
