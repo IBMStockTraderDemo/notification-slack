@@ -28,13 +28,8 @@ spec:
     spec:
       containers:
       - name: notification-slack
-#       Note: this manifests/deploy.yaml will be used when we want to deploy this directly using kubectl or a helm chart. 
-#             Microclimate uses the Charts folder so we can actually have both options
-#       image: ibmstocktrader/notification-slack:latest # Pull from docker hub by default
-        image: ibmstocktraderdemo/notification-slack:latest # Pull from docker hub by default
-#       image: mycluster.icp:8500/stock-trader/notification-twitter:latest # IBM Cloud Private
-#       image: registry.ng.bluemix.net/stock_trader/notification-slack:latest # IBM Container Service
-#       image: ibmstocktrader/notification-slack:latest #DockerHub
+        image: stocktraderdemo/notification-slack:latest # Pull from docker hub by default
+        imagePullPolicy: Always
         env:
           - name: OW_URL
             valueFrom:
@@ -64,7 +59,6 @@ spec:
         ports:
           - containerPort: 9080
           - containerPort: 9443
-        imagePullPolicy: Always
 ---
 #Deploy the service
 apiVersion: v1
